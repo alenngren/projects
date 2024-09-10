@@ -23,9 +23,30 @@ def absc(z):
 
 def readx(x):
     print(type(x))
-    y = x.split('+')
-    print(y)
-    print(sum(list(map(int, y))))
+    breakout_index = []
+    for i, c in enumerate(x):
+        if (c == "("):
+            breakout_index.append(i)
+            for j, c in enumerate(x):
+                if (c == ")"):
+                    breakout_index.append(j)
+
+
+
+    oper = ["+"]
+    numb = ['1', '2', '3']
+    print(breakout_index)
+    for i in range(breakout_index[0]+1, breakout_index[1]):
+        print(i, x[i])
+        if (x[i] in oper):
+            print(f"operator {x[i]}")
+            y = int(x[i-1])+int(x[i+1])
+            print("y =",  y)
+        if (x[i] in numb):
+            print(f"numb in {int(x[i])}")
+            if(x[i+1] in numb):
+                print(x[i:i+1])
+
 
 
 def main():
@@ -37,17 +58,18 @@ def main():
         readx(x)
         end = time.time()
         print(end-start, "seconds")
+        return 1
         return main()
 
+
 print("---")
-# main()
+main()
 
 
-x = cnumber(1, 2)
-y = cnumber(2, 3)
-print('x = ', x)
-print('y = ', y)
-
-print("x + y = ", add(x, y))
-print("x * y = ", mult(x, y))
-print('abs(x) = ', absc(x))
+# x = cnumber(1, 2)
+# y = cnumber(2, 3)
+# print('x = ', x)
+# print('y = ', y)
+# print("x + y = ", add(x, y))
+# print("x * y = ", mult(x, y))
+# print('abs(x) = ', absc(x))
